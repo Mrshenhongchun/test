@@ -17,6 +17,8 @@ public interface SysLogDao extends DefaultDao<SysLog>{
 	 */
 	int deleteObjects(@Param("ids") Integer... ids);
 	
+	int insertObject(SysLog entity);
+	
 	
 	
 

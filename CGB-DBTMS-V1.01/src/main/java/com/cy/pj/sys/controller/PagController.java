@@ -42,10 +42,35 @@ public class PagController {
 			return "sys/role_edit";
 	}
 	
-	@RequestMapping("doDeptListUI")
+	@RequestMapping("dept/doDeptListUI")
 	public String doDeptListUI(){
 	return "sys/dept_list";
 	}
+	@RequestMapping("dept/doDeptEditUI")
+	 public String doDeptEditUI(){
+		 return "sys/dept_edit";
+	 }
+	@RequestMapping("doLoginUI")
+	public String doLoginUI(){
+			return "login";
+	}
+	
+	@RequestMapping("user/doUserListUI")
+	public String doUserListUI() {
+		return "sys/user_list";
+	}
+	
+	@RequestMapping("user/doUserEditUI")
+	public String doUserEditUI(){
+		return "sys/user_edit";
+	}
+	@RequestMapping("user/doPwdEditUI")
+	public String doPwdEditUI(){
+		return "sys/pwd_edit";
+	}
+
+
+
 
 
 	

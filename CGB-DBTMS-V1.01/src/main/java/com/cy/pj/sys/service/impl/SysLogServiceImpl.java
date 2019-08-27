@@ -1,16 +1,21 @@
 package com.cy.pj.sys.service.impl;
 
-
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cy.pj.common.annotation.RequiredLog;
 import com.cy.pj.sys.dao.SysLogDao;
 import com.cy.pj.sys.entity.SysLog;
 import com.cy.pj.sys.service.SysLogService;
 import com.cy.pj.sys.service.exception.ServiceException;
 
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @Service
 public class SysLogServiceImpl extends DefaultSericeImpl<SysLog> implements SysLogService {
 
@@ -22,6 +27,22 @@ public class SysLogServiceImpl extends DefaultSericeImpl<SysLog> implements SysL
 		this.sysLogDao = sysLogDao;
 	}
 
+	//@Async("asuncThread")
+	@Async
+	@Transactional(propagation = Propagation.REQUIRED)
+	@Override
+	public void saveObjiet(SysLog entity) {
+		log.info("log.current.thread" + Thread.currentThread().hashCode());
+		try {
+			Thread.sleep(5000);
+		} catch (Exception e) {
+		}
+		sysLogDao.insertObject(entity);
+
+	}
+
+	@RequiresPermissions("sys:log:delete")
+	@RequiredLog
 	@Override
 	public int deleteObjects(Integer... ids) {
 		// 1.验证数据是否合法

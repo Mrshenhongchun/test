@@ -1,8 +1,12 @@
 package com.cy.pj.sys.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import com.cy.pj.common.vo.CheckBox;
 import com.cy.pj.sys.dao.SysRoleDao;
 import com.cy.pj.sys.dao.SysRoleMenuDao;
 import com.cy.pj.sys.dao.SysUserRoleDao;
@@ -44,8 +48,8 @@ public class SysRoleServiceImpl extends DefaultSericeImpl<SysRole> implements Sy
 		// 1.合法性验证
 		if (entity == null)
 			throw new ServiceException("保存数据不能为空");
-		if (StringUtils.isEmpty(entity.getName()))
-			throw new ServiceException("角色名不能为空");
+		//if (StringUtils.isEmpty(entity.getName()))
+			//throw new ServiceException("角色名不能为空");
 		if (menuIds == null || menuIds.length == 0)
 			throw new ServiceException("必须为角色赋予权限");
 		// 2.保存数据
@@ -78,6 +82,11 @@ public class SysRoleServiceImpl extends DefaultSericeImpl<SysRole> implements Sy
 
 		// 3.返回结果
 		return rows;
+	}
+
+	@Override
+	public List<CheckBox> findObjects() {
+		return sysRoleDao.findObjects();
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.cy.pj.sys.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,20 +28,24 @@ public class SysRoleController {
 		sysRoleService.deleteObject(id);
 		return new JsonResult("delete Ok");
 	}
-	@RequestMapping("doSaveObject")	
-	public JsonResult doSaveObject(
-	    		SysRole entity,Integer[] menuIds){
-	    	sysRoleService.saveObject(entity,menuIds);
-	return new JsonResult("save ok");    
+
+	@RequestMapping("doSaveObject")
+	public JsonResult doSaveObject(@Valid SysRole entity, Integer[] menuIds) {
+		sysRoleService.saveObject(entity, menuIds);
+		return new JsonResult("save ok");
 	}
-	
+
 	@RequestMapping("doUpdateObject")
-	
-	public JsonResult doUpdateObject(SysRole entity,
-	Integer[] menuIds){
-		sysRoleService.updateObject(entity, menuIds);
-	 return new JsonResult("update ok");
 
+	public JsonResult doUpdateObject(SysRole entity, Integer[] menuIds) {
+		sysRoleService.updateObject(entity, menuIds);
+		return new JsonResult("update ok");
 
 	}
+
+	@RequestMapping("doFindRoles")
+	public JsonResult doFindObjects() {
+		return new JsonResult(sysRoleService.findObjects());
+	}
+
 }
